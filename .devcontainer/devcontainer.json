@@ -1,0 +1,18 @@
+{
+  "name": "God's Eye View (da telefono)",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-24-bookworm",
+  "hostRequirements": { "cpus": 2 },
+  "containerEnv": {
+    "PUPPETEER_SKIP_DOWNLOAD": "1",
+    "PORT": "4173"
+  },
+  "postCreateCommand": "npm ci --no-audit --no-fund",
+  "postStartCommand": "setsid nohup bash -c 'GEV_ALLOWED_HOSTS=\"$CODESPACE_NAME-4173.$GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN\" npm run dev -- --port 4173' > /tmp/gev.log 2>&1 &",
+  "forwardPorts": [4173],
+  "portsAttributes": {
+    "4173": {
+      "label": "God's Eye View",
+      "onAutoForward": "openBrowser"
+    }
+  }
+}
